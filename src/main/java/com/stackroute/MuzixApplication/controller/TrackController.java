@@ -21,41 +21,41 @@ public class TrackController {
         this.trackService = trackService;
     }
 
-    @PostMapping(value = "trackSave")
+    @PostMapping(value = "track")
     public ResponseEntity<?> saveUser(@RequestBody Track track) throws TrackAlreadyExistException {
         ResponseEntity responseEntity;
         try{
             trackService.saveTrack(track);
-            responseEntity = new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<Track>(track, HttpStatus.CREATED);
         }catch (TrackAlreadyExistException e){
             responseEntity = new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
 
-    @GetMapping(value = "getTrack")
+    @GetMapping(value = "track")
     public ResponseEntity<?> getAllTrack(){
         return new ResponseEntity<List<Track>>(trackService.getAllTrack(),HttpStatus.OK);
     }
 
-    @PutMapping(value="getUpdate")
+    @PutMapping(value="track")
     public ResponseEntity<?> updateTrack(@RequestBody Track track) throws TrackNotFoundException {
         ResponseEntity responseEntity;
         try{
             trackService.updateTrack(track);
-            responseEntity = new ResponseEntity<String>("updated successfully",HttpStatus.OK);
+            responseEntity = new ResponseEntity<Track>(track,HttpStatus.OK);
         }catch (TrackNotFoundException e){
             responseEntity = new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
 
-    @DeleteMapping(value = "getDelete/{trackId}")
+    @DeleteMapping(value = "track/{trackId}")
     public ResponseEntity<?> removeTrack(@PathVariable int trackId) throws TrackNotFoundException{
         ResponseEntity<?>  responseEntity;
         try{
             trackService.removeTrack(trackId);
-            responseEntity = new ResponseEntity<String>("successfully deleted",HttpStatus.OK);
+            responseEntity = new ResponseEntity<String>(trackId+"is deleted",HttpStatus.OK);
         }catch(TrackNotFoundException e){
             responseEntity = new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
         }

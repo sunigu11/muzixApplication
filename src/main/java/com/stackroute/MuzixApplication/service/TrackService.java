@@ -11,6 +11,6 @@ import java.util.List;
 public interface TrackService {
     public Track saveTrack(Track track) throws TrackAlreadyExistException;
     public List<Track> getAllTrack();
-    public boolean updateTrack(Track track) throws TrackNotFoundException;
-    public boolean removeTrack(int trackId) throws TrackNotFoundException;
+    public Track updateTrack(Track track) throws TrackNotFoundException;
+    public Track removeTrack(int trackId) throws TrackNotFoundException;
 }
