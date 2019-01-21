@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-@Log4j
 public class GlobalExceptionHandler {
     @ResponseStatus(value= HttpStatus.CONFLICT, reason="Not all mandatory fields are filled")
     @ExceptionHandler(TrackAlreadyExistException.class)

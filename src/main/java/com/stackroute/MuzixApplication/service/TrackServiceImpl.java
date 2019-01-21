@@ -3,7 +3,9 @@ package com.stackroute.MuzixApplication.service;
 import com.stackroute.MuzixApplication.domain.Track;
 import com.stackroute.MuzixApplication.exception.TrackAlreadyExistException;
 import com.stackroute.MuzixApplication.exception.TrackNotFoundException;
+//import com.stackroute.MuzixApplication.repository.TrackRepository;
 import com.stackroute.MuzixApplication.repository.TrackRepository;
+//import com.stackroute.MuzixApplication.repository.TrackRepositoryMongo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import java.util.List;
 @Service
 public class TrackServiceImpl implements TrackService{
 
+   // TrackRepository trackRepository;
     TrackRepository trackRepository;
 
     @Autowired
@@ -25,7 +28,7 @@ public class TrackServiceImpl implements TrackService{
         if(trackRepository.existsById(track.getTrackId())){
             throw new TrackAlreadyExistException("track already exist exception");
         }
-        return trackRepository.save(track);
+        return  trackRepository.save(track);
     }
 
     @Override
@@ -42,7 +45,7 @@ public class TrackServiceImpl implements TrackService{
             updatedTrack.setTrackName(track.getTrackName());
             updatedTrack.setComment(track.getComment());
             trackRepository.save(updatedTrack);*/
-            return trackRepository.save(track);
+            return  trackRepository.save(track);
 
         }
         else {
@@ -56,8 +59,8 @@ public class TrackServiceImpl implements TrackService{
     public Track removeTrack(int trackId) throws TrackNotFoundException {
         if(trackRepository.existsById(trackId)){
             trackRepository.deleteById(trackId);
-          // return  trackRepository.findById(trackId).get();
-            return trackRepository.getOne(trackId);
+          return  trackRepository.findById(trackId).get();
+            //return trackRepository.getOne(trackId);
         }
        else {
             throw new TrackNotFoundException("track does not exist");
