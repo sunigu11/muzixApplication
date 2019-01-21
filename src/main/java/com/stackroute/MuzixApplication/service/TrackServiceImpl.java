@@ -56,10 +56,10 @@ public class TrackServiceImpl implements TrackService{
     public Track removeTrack(int trackId) throws TrackNotFoundException {
         if(trackRepository.existsById(trackId)){
             trackRepository.deleteById(trackId);
-           // return  trackRepository.findById(trackId).get();
+          // return  trackRepository.findById(trackId).get();
             return trackRepository.getOne(trackId);
         }
-        else {
+       else {
             throw new TrackNotFoundException("track does not exist");
         }
 
